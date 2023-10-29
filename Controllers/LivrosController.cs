@@ -24,9 +24,28 @@ namespace LivroRecomendacao.Controllers
         public async Task<IActionResult> Index()
         {
 
-            return _context.Livro != null ? 
-                        View(await _context.Livro.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.Livro'  is null.");
+            List<Livro> livro = await _context.Livro.ToListAsync();
+            List<Autor> autores = await _context.Autor.ToListAsync();
+            List<Genero> generos = await _context.Genero.ToListAsync();
+            List<LivroListViewModel> livroViewModel = new List<LivroListViewModel>();
+
+            foreach (var item in livro)
+            {
+                LivroListViewModel livroViewModelObject = new LivroListViewModel()
+                {
+                    Id = item.Id,
+                    Titulo = item.Titulo,
+                    Descrico = item.Descrico,
+                    AutorId = item.AutorId,
+                    NomeAutor = autores.Where(x => x.Id == item.AutorId).FirstOrDefault().Nome,
+                    GeneroId = item.GeneroId,
+                    NomeGenero = generos.Where(x => x.Id == item.GeneroId).FirstOrDefault().Nome,
+                };
+
+                livroViewModel.Add(livroViewModelObject);
+            }
+
+            return View(livroViewModel);
         }
 
         // GET: Livros/Details/5
@@ -63,15 +82,23 @@ namespace LivroRecomendacao.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(LivroViewModel livro)
+        public async Task<IActionResult> Create(LivroViewModel livroViewModel)
         {
             if (ModelState.IsValid)
             {
+                var livro = new Livro()
+                {
+                    Titulo = livroViewModel.Titulo,
+                    Descrico = livroViewModel.Descrico,
+                    AutorId = livroViewModel.AutorId,
+                    GeneroId = livroViewModel.GeneroId
+                };
+
                 _context.Add(livro);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(livro);
+            return View(livroViewModel);
         }
 
         // GET: Livros/Edit/5
@@ -81,13 +108,29 @@ namespace LivroRecomendacao.Controllers
             {
                 return NotFound();
             }
-
+            
+            var autores = _context.Autor;
+            ViewBag.Autores = new SelectList(autores, "Id", "Nome");
+            
+            var generos = _context.Genero;
+            ViewBag.Generos = new SelectList(generos, "Id", "Nome");
+            
             var livro = await _context.Livro.FindAsync(id);
+
             if (livro == null)
             {
                 return NotFound();
             }
-            return View(livro);
+
+            var livroViewModel = new LivroViewModel()
+            {
+                Titulo = livro.Titulo,
+                Descrico = livro.Descrico,
+                AutorId = livro.AutorId,
+                GeneroId = livro.GeneroId
+            };
+
+            return View(livroViewModel);
         }
 
         // POST: Livros/Edit/5
@@ -95,9 +138,9 @@ namespace LivroRecomendacao.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Descrico")] Livro livro)
+        public async Task<IActionResult> Edit(int id, LivroViewModel livroViewModel)
         {
-            if (id != livro.Id)
+            if (id != livroViewModel.Id)
             {
                 return NotFound();
             }
@@ -106,12 +149,21 @@ namespace LivroRecomendacao.Controllers
             {
                 try
                 {
+                    var livro = new Livro()
+                    {
+                        Id = livroViewModel.Id,
+                        Titulo = livroViewModel.Titulo,
+                        Descrico = livroViewModel.Descrico,
+                        AutorId = livroViewModel.AutorId,
+                        GeneroId = livroViewModel.GeneroId
+                    };
+
                     _context.Update(livro);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LivroExists(livro.Id))
+                    if (!LivroExists(livroViewModel.Id))
                     {
                         return NotFound();
                     }
@@ -122,7 +174,7 @@ namespace LivroRecomendacao.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(livro);
+            return View(livroViewModel);
         }
 
         // GET: Livros/Delete/5

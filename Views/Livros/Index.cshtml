@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LivroRecomendacao.Models.Livro>
+﻿@model IEnumerable<LivroRecomendacao.ViewModels.LivroListViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,8 +16,15 @@
                 @Html.DisplayNameFor(model => model.Titulo)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.NomeAutor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeGenero)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Descrico)
             </th>
+
             <th></th>
         </tr>
     </thead>
@@ -26,6 +33,12 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeAutor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeGenero)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Descrico)

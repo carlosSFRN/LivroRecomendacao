@@ -7,11 +7,11 @@ namespace LivroRecomendacao.ViewModels
     {
         public int Id { get; set; }
         public string Titulo { get; set; }
-        [Display(Name = "Autor")]
         public int AutorId { get; set; }
+        [Display(Name = "Autor")]
         public string NomeAutor { get; set; }
-        [Display(Name = "Genêro")]
         public int GeneroId { get; set; }
+        [Display(Name = "Genêro")]
         public string NomeGenero { get; set; }
         public string Descrico { get; set; }
     }

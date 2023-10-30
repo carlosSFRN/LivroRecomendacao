@@ -1,8 +1,25 @@
-﻿@{
+﻿@model IEnumerable<LivroRecomendacao.ViewModels.LivroListViewModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1>Obras literárias</h1>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3 mr-1">
+            <div class="card" style="width: 18rem;">
+                @*<img src="..." class="card-img-top" alt="...">*@
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Titulo)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Descrico)</p>
+                    <a href="#" class="btn btn-primary">Favoritar</a>
+                </div>
+            </div>
+        </div>
+    }
 </div>
+
+

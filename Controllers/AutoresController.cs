@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LivroRecomendacao.Data;
 using LivroRecomendacao.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LivroRecomendacao.Controllers
 {
+    [Authorize(Roles = "Adm")]
     public class AutoresController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using LivroRecomendacao.Data;
 using LivroRecomendacao.Models;
 using LivroRecomendacao.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LivroRecomendacao.Controllers
 {
+    [Authorize(Roles = "Adm")]
     public class LivrosController : Controller
     {
         private readonly ApplicationDbContext _context;

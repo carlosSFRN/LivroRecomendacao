@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LivroRecomendacao.Controllers
 {
+    [Authorize(Roles = "Adm,Member")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

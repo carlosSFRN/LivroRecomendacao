@@ -4,6 +4,9 @@ using LivroRecomendacao.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LivroRecomendacao.Controllers
 {
@@ -11,11 +14,13 @@ namespace LivroRecomendacao.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -41,7 +46,26 @@ namespace LivroRecomendacao.Controllers
                 livroViewModel.Add(livroViewModelObject);
             }
 
-            return View(livroViewModel); ;
+            return View(livroViewModel);
+        }
+
+        // GET: Livros/Edit/5
+        public async Task<IActionResult> Favoritar(int id)
+        {
+            string? email = HttpContext.User.Identity?.Name;
+
+            var userId = await _userManager.FindByEmailAsync(email);
+
+            var favorito = new Favorito()
+            {
+                UserId = userId.Id,
+                LivroId = id
+            };
+
+            _context.Add(favorito);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()

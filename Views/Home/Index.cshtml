@@ -3,23 +3,33 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-<h1>Obras literárias</h1>
-
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-sm-3 mr-1">
-            <div class="card" style="width: 18rem;">
-                @*<img src="..." class="card-img-top" alt="...">*@
-                <div class="card-body">
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Titulo)</h5>
-                    <p class="card-text">@Html.DisplayFor(modelItem => item.Descrico)</p>
-                    <a href="#" class="btn btn-primary">Favoritar</a>
+    
+<section id="gallery">
+    <div class="container">
+        <h1>Obras literárias</h1>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60"
+                                alt="" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Titulo)</h5>
+                            <h6 class="card-title">@Html.DisplayFor(modelItem => item.NomeAutor)</h6>
+                            <p class="card-text">
+                                @Html.DisplayFor(modelItem => item.Descrico)
+                            </p>
+                            @*<a href="" class="btn btn-outline-success btn-sm">Read More</a>*@
+                            <div class="form-group">
+                                <a asp-action="Favoritar" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">Favoritar</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
-    }
-</div>
+    </div>
+</section>
 
 

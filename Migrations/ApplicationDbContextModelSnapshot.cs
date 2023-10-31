@@ -39,6 +39,28 @@ namespace LivroRecomendacao.Migrations
                     b.ToTable("Autor");
                 });
 
+            modelBuilder.Entity("LivroRecomendacao.Models.Favorito", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("LivroId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LivroId");
+
+                    b.ToTable("Favorito");
+                });
+
             modelBuilder.Entity("LivroRecomendacao.Models.Genero", b =>
                 {
                     b.Property<int>("Id")
@@ -287,6 +309,17 @@ namespace LivroRecomendacao.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("LivroRecomendacao.Models.Favorito", b =>
+                {
+                    b.HasOne("LivroRecomendacao.Models.Livro", "Livro")
+                        .WithMany()
+                        .HasForeignKey("LivroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Livro");
                 });
 
             modelBuilder.Entity("LivroRecomendacao.Models.Livro", b =>

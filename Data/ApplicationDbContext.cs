@@ -14,5 +14,6 @@ namespace LivroRecomendacao.Data
         public DbSet<LivroRecomendacao.Models.Autor>? Autor { get; set; }
         public DbSet<LivroRecomendacao.Models.Genero>? Genero { get; set; }
         public DbSet<LivroRecomendacao.Models.Favorito>? Favorito { get; set; }
+        public DbSet<LivroRecomendacao.Models.Preferencias>? Preferencias { get; set; }
     }
 }

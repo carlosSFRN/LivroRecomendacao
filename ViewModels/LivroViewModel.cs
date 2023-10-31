@@ -17,5 +17,8 @@ namespace LivroRecomendacao.ViewModels
         public int GeneroId { get; set; }
         [Required(ErrorMessage = "Informe uma descrição")]
         public string Descrico { get; set; }
+        [Display(Name = "Link da Foto")]
+        [Required(ErrorMessage = "Informe uma foto")]
+        public string LinkFoto { get; set; }
     }
 }

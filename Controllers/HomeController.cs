@@ -7,6 +7,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Net;
 
 namespace LivroRecomendacao.Controllers
 {
@@ -38,6 +39,7 @@ namespace LivroRecomendacao.Controllers
                     Titulo = item.Titulo,
                     Descrico = item.Descrico,
                     AutorId = item.AutorId,
+                    LinkFoto = GetImageFromUrl(item.LinkFoto),
                     NomeAutor = autores.Where(x => x.Id == item.AutorId).FirstOrDefault().Nome,
                     GeneroId = item.GeneroId,
                     NomeGenero = generos.Where(x => x.Id == item.GeneroId).FirstOrDefault().Nome,
@@ -66,6 +68,38 @@ namespace LivroRecomendacao.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public static string GetImageFromUrl(string url)
+        {
+            try
+            {
+                var request = WebRequest.Create(url);
+                request.Timeout = 3000; // optional
+                using (var response = request.GetResponse())
+                {
+                    using (var stream = response.GetResponseStream())
+                    {
+                        if (response.ContentType.Contains("image/"))
+                        {
+                            var imageBytes = new byte[response.ContentLength];
+                            using (var memoryStream = new MemoryStream())
+                            {
+                                stream.CopyTo(memoryStream);
+                                imageBytes = memoryStream.ToArray();
+                            }
+                            string imgBase64Data = Convert.ToBase64String(imageBytes);
+                            return $"data:{response.ContentType};base64,{imgBase64Data}";
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // you can throw or ignore 
+            }
+
+            return null;
         }
 
         public IActionResult Privacy()

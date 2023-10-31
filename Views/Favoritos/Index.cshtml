@@ -4,18 +4,15 @@
     ViewData["Title"] = "Index";
 }
 
-
-
-
-
 <div class="container">
     <h1>Seus livros favoritos</h1>
+    <hr />
     @foreach (var item in Model)
     {
         <div class="card float-right mb-2">
             <div class="row">
                 <div class="col-sm-5">
-                    <img class="d-block w-100" src="https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60" alt="">
+                    <img class="d-block w-100" src="@item.LinkFoto" alt="" style="height:350px">
                 </div>
                 <div class="col-sm-7 p-3">
                     <div class="card-block">
@@ -23,7 +20,7 @@
                         <p>@Html.DisplayFor(modelItem => item.NomeAutor)</p>
                         <p>@Html.DisplayFor(modelItem => item.Descrico)</p>
                         <br>
-                        <a href="#" class="btn btn-danger btn-sm float-right">Desfavoritar</a>
+                        <a asp-action="Desfavoritar" asp-route-id="@item.Id" class="btn btn-danger btn-sm float-right">Desfavoritar</a>
                     </div>
                 </div>
 

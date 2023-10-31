@@ -46,6 +46,7 @@ namespace LivroRecomendacao.Controllers
                 LivroListViewModel livroViewModelObject = new LivroListViewModel()
                 {
                     Id = item.Id,
+                    LinkFoto = livro.Where(x => x.Id == item.LivroId).FirstOrDefault().LinkFoto,
                     Titulo = livro.Where(x => x.Id == item.LivroId).FirstOrDefault().Titulo,
                     Descrico = livro.Where(x => x.Id == item.LivroId).FirstOrDefault().Descrico,
                     NomeAutor = autores.Where(x => x.Id == idAutor).FirstOrDefault().Nome
@@ -56,6 +57,25 @@ namespace LivroRecomendacao.Controllers
 
 
             return View(livroViewModel);
+        }
+
+        // GET: Livros/Edit/5
+        public async Task<IActionResult> Desfavoritar(int id)
+        {
+            var favorito = new Favorito()
+            {
+                Id = id
+            };
+
+            if (favorito == null)
+            {
+                return NotFound();
+            }
+
+            _context.Favorito.Remove(favorito);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Favoritos/Delete/5

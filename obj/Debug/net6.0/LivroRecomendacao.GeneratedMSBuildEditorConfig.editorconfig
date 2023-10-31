@@ -184,10 +184,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b3Jlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/carlo/OneDrive/Área de Trabalho/Projetos/LivroRecomendacaoTest/LivroRecomendacao/Views/Autores/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b3Jlc1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/carlo/OneDrive/Área de Trabalho/Projetos/LivroRecomendacaoTest/LivroRecomendacao/Views/Autores/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b3Jlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -204,10 +200,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3JpdG9zXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/carlo/OneDrive/Área de Trabalho/Projetos/LivroRecomendacaoTest/LivroRecomendacao/Views/Favoritos/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3JpdG9zXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/carlo/OneDrive/Área de Trabalho/Projetos/LivroRecomendacaoTest/LivroRecomendacao/Views/Favoritos/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmF2b3JpdG9zXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -222,10 +214,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/carlo/OneDrive/Área de Trabalho/Projetos/LivroRecomendacaoTest/LivroRecomendacao/Views/Generos/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuZXJvc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/carlo/OneDrive/Área de Trabalho/Projetos/LivroRecomendacaoTest/LivroRecomendacao/Views/Generos/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuZXJvc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/carlo/OneDrive/Área de Trabalho/Projetos/LivroRecomendacaoTest/LivroRecomendacao/Views/Generos/Edit.cshtml]
@@ -250,10 +238,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/carlo/OneDrive/Área de Trabalho/Projetos/LivroRecomendacaoTest/LivroRecomendacao/Views/Livros/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGl2cm9zXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/carlo/OneDrive/Área de Trabalho/Projetos/LivroRecomendacaoTest/LivroRecomendacao/Views/Livros/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGl2cm9zXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/carlo/OneDrive/Área de Trabalho/Projetos/LivroRecomendacaoTest/LivroRecomendacao/Views/Livros/Edit.cshtml]

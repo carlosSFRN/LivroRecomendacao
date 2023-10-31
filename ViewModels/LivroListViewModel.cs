@@ -14,5 +14,6 @@ namespace LivroRecomendacao.ViewModels
         [Display(Name = "Genêro")]
         public string NomeGenero { get; set; }
         public string Descrico { get; set; }
+        public string LinkFoto { get; set; }
     }
 }

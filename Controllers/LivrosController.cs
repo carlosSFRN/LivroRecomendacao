@@ -37,6 +37,7 @@ namespace LivroRecomendacao.Controllers
                     Titulo = item.Titulo,
                     Descrico = item.Descrico,
                     AutorId = item.AutorId,
+                    LinkFoto = item.LinkFoto,
                     NomeAutor = autores.Where(x => x.Id == item.AutorId).FirstOrDefault().Nome,
                     GeneroId = item.GeneroId,
                     NomeGenero = generos.Where(x => x.Id == item.GeneroId).FirstOrDefault().Nome,
@@ -90,6 +91,7 @@ namespace LivroRecomendacao.Controllers
                 {
                     Titulo = livroViewModel.Titulo,
                     Descrico = livroViewModel.Descrico,
+                    LinkFoto = livroViewModel.LinkFoto,
                     AutorId = livroViewModel.AutorId,
                     GeneroId = livroViewModel.GeneroId
                 };
@@ -126,6 +128,7 @@ namespace LivroRecomendacao.Controllers
             {
                 Titulo = livro.Titulo,
                 Descrico = livro.Descrico,
+                LinkFoto = livro.LinkFoto,
                 AutorId = livro.AutorId,
                 GeneroId = livro.GeneroId
             };
@@ -154,6 +157,7 @@ namespace LivroRecomendacao.Controllers
                         Id = livroViewModel.Id,
                         Titulo = livroViewModel.Titulo,
                         Descrico = livroViewModel.Descrico,
+                        LinkFoto = livroViewModel.LinkFoto,
                         AutorId = livroViewModel.AutorId,
                         GeneroId = livroViewModel.GeneroId
                     };

@@ -37,5 +37,5 @@ $ dotnet ef
 * admin@outlook.com
 * Livro@123
 
-## Membro
-Todos os usuarios criados da tela de ''registrar'' serão da role de 'Membro'
+## Pagina Registar
+Todos os usuarios criados na tela de 'registrar' serão da role de 'Membro'

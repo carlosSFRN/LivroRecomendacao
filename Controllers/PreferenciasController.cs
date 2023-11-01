@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LivroRecomendacao.Data;
 using LivroRecomendacao.Models;
 
-namespace LivroRecomendacao.Views
+namespace LivroRecomendacao.Controllers
 {
     public class PreferenciasController : Controller
     {
@@ -161,14 +161,14 @@ namespace LivroRecomendacao.Views
             {
                 _context.Preferencias.Remove(preferencias);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PreferenciasExists(int id)
         {
-          return (_context.Preferencias?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Preferencias?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -2,10 +2,6 @@
 
 ## Projeto
 LivroRecomendacao faz recomendações de livros de acordo com as preferências do usuario.
-
-## Perfis do sistema
-* Adm
-* Membro
 	
 ## Tecnologias
 Project is created with:
@@ -33,3 +29,13 @@ Para verificar a versão utlizada, execute no seu PowerShell
 $ dotnet ef
 ```
 
+## Perfis do sistema
+* Adm
+* Membro
+
+## User Default Admin
+* admin@outlook.com
+* Livro@123
+
+## Membro
+Todos os usuarios criados da tela de ''registrar'' serão da role de 'Membro'

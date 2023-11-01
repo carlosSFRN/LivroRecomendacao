@@ -4,28 +4,30 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="container">
-    <h1>Seus livros favoritos</h1>
-    <hr />
-    @foreach (var item in Model)
-    {
-        <div class="card float-right mb-2">
-            <div class="row">
-                <div class="col-sm-5">
-                    <img class="d-block w-100" src="@item.LinkFoto" alt="" style="height:350px">
-                </div>
-                <div class="col-sm-7 p-3">
-                    <div class="card-block">
-                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.Titulo)</h4>
-                        <p>@Html.DisplayFor(modelItem => item.NomeAutor)</p>
-                        <p>@Html.DisplayFor(modelItem => item.Descrico)</p>
-                        <br>
-                        <a asp-action="Desfavoritar" asp-route-id="@item.Id" class="btn btn-danger btn-sm float-right">Desfavoritar</a>
+<section id="gallery">
+    <div class="container">
+        <h1>Obras literárias recomendadas</h1>
+        <h6>Genêro favorito: @ViewBag?.GeneroPreferencia</h6>
+        <h6>Autor favorito: @ViewBag?.AutorPreferencia</h6>
+        <hr />
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <img src="@item.LinkFoto" alt="" class="card-img-top w-100" style="height:350px">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Titulo)</h5>
+                            <h6 class="card-title">@Html.DisplayFor(modelItem => item.NomeAutor)</h6>
+                            <small class="text-muted">@Html.DisplayFor(modelItem => item.NomeGenero)</small>
+                            <p class="card-text">
+                                @Html.DisplayFor(modelItem => item.Descrico)
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-            </div>
+            }
         </div>
-    }
-</div>
+    </div>
+</section>
 

@@ -9,6 +9,8 @@ using LivroRecomendacao.Data;
 using LivroRecomendacao.Models;
 using LivroRecomendacao.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using System.Net;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace LivroRecomendacao.Controllers
 {
@@ -29,34 +31,74 @@ namespace LivroRecomendacao.Controllers
             List<Livro> livro = await _context.Livro.ToListAsync();
             List<Autor> autores = await _context.Autor.ToListAsync();
             List<Genero> generos = await _context.Genero.ToListAsync();
-            List<Favorito> favorito = await _context.Favorito.ToListAsync();
+            List<Preferencias> preferencias = await _context.Preferencias.ToListAsync();
 
-            string? email = HttpContext.User.Identity?.Name;
+            string email = User.Identity.Name;
 
-            var userId = await _userManager.FindByEmailAsync(email);
+			var userId = await _userManager.FindByEmailAsync(email);
 
-            favorito = favorito.Where(x => x.UserId == userId.Id).ToList();
+            Preferencias preferenciasObject = preferencias.FirstOrDefault(x => x.UserId == userId.Id); 
 
             List<LivroListViewModel> livroViewModel = new List<LivroListViewModel>();
 
-            foreach (var item in favorito)
+            foreach (var item in livro)
             {
-                int idAutor = livro.Where(x => x.Id == item.LivroId).FirstOrDefault().AutorId;
-
                 LivroListViewModel livroViewModelObject = new LivroListViewModel()
                 {
                     Id = item.Id,
-                    LinkFoto = livro.Where(x => x.Id == item.LivroId).FirstOrDefault().LinkFoto,
-                    Titulo = livro.Where(x => x.Id == item.LivroId).FirstOrDefault().Titulo,
-                    Descrico = livro.Where(x => x.Id == item.LivroId).FirstOrDefault().Descrico,
-                    NomeAutor = autores.Where(x => x.Id == idAutor).FirstOrDefault().Nome
-                };
+                    Titulo = item.Titulo,
+                    Descrico = item.Descrico,
+                    AutorId = item.AutorId,
+                    LinkFoto = GetImageFromUrl(item.LinkFoto),
+                    NomeAutor = autores.Where(x => x.Id == item.AutorId).FirstOrDefault().Nome,
+                    GeneroId = item.GeneroId,
+                    NomeGenero = generos.Where(x => x.Id == item.GeneroId).FirstOrDefault().Nome
+				};
 
                 livroViewModel.Add(livroViewModelObject);
             }
 
+            if (!User.IsInRole("Adm"))
+            {
+                livroViewModel = livroViewModel.Where(x => x.GeneroId == preferenciasObject.GeneroId || x.AutorId == preferenciasObject.AutorId).ToList();
+                ViewBag.AutorPreferencia = livroViewModel.Where(x => x.AutorId == preferenciasObject.AutorId).FirstOrDefault().NomeAutor;
+				ViewBag.GeneroPreferencia = livroViewModel.Where(x => x.GeneroId == preferenciasObject.GeneroId).FirstOrDefault().NomeGenero;
 
-            return View(livroViewModel);
+			}
+
+			return View(livroViewModel);
+        }
+
+        public static string GetImageFromUrl(string url)
+        {
+            try
+            {
+                var request = WebRequest.Create(url);
+                request.Timeout = 3000; // optional
+                using (var response = request.GetResponse())
+                {
+                    using (var stream = response.GetResponseStream())
+                    {
+                        if (response.ContentType.Contains("image/"))
+                        {
+                            var imageBytes = new byte[response.ContentLength];
+                            using (var memoryStream = new MemoryStream())
+                            {
+                                stream.CopyTo(memoryStream);
+                                imageBytes = memoryStream.ToArray();
+                            }
+                            string imgBase64Data = Convert.ToBase64String(imageBytes);
+                            return $"data:{response.ContentType};base64,{imgBase64Data}";
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // you can throw or ignore 
+            }
+
+            return null;
         }
 
         // GET: Livros/Edit/5

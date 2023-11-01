@@ -1,0 +1,52 @@
+﻿@model LivroRecomendacao.ViewModels.RegisterViewModel
+
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<div class="card">
+				<header class="card-header">
+					<h4 class="card-title mt-2">Cadastro</h4>
+				</header>
+				<article class="card-body">
+					<form asp-action="Create" asp-controller="Registrar" method="post">
+						<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+						<div class="form-group">
+							<label asp-for="Email"></label>
+							<input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" />
+							<span asp-validation-for="Email" class="text-danger"></span>
+						</div>
+						<div class="form-group mt-2">
+							<label asp-for="Password"></label>
+							<input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" />
+							<span asp-validation-for="Password" class="text-danger"></span>
+						</div>
+						<div class="form-group mt-2">
+							<label asp-for="ConfirmPassword"></label>
+							<input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+							<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+						</div>
+
+						<div class="form-group mt-2">
+							<label asp-for="AutorId" class="control-label"></label>
+							<select asp-for="AutorId" asp-items="ViewBag.Autores" class="form-control"></select>
+							<span asp-validation-for="AutorId" class="text-danger"></span>
+						</div>
+						<div class="form-group mt-2">
+							<label asp-for="GeneroId" class="control-label"></label>
+							<select asp-for="GeneroId" asp-items="ViewBag.Generos" class="form-control"></select>
+							<span asp-validation-for="GeneroId" class="text-danger"></span>
+						</div>
+						<div class="form-group mt-2">
+							<button type="submit" class="btn btn-primary w-100">Registrar-se</button>
+						</div>
+					</form>
+				</article>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
